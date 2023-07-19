@@ -4,12 +4,21 @@ import { HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { EditFormComponent } from 'components/edit-form/edit-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditUserFormComponent } from './components/edit-user/edit-user-form/edit-user-form.component';
+import { RegisterComponent } from './components/register/register.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+
 
 @NgModule({
-  declarations: [AppComponent, EditFormComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  declarations: [AppComponent, EditUserFormComponent, RegisterComponent, EditUserComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
