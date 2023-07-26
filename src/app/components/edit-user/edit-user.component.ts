@@ -19,8 +19,10 @@ export class EditUserComponent {
       .subscribe((result: User[]) => (this.users = result));
   }
 
-  updatedUsersList(users: User[]) {
-    this.users = users;
+  updatedUsersList() {
+    this.userService.getUsers().subscribe((updatedUsers: User[]) => {
+      this.users = updatedUsers;
+    });
   }
 
   addNewUser() {
