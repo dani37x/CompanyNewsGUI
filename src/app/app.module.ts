@@ -8,10 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserFormComponent } from './components/edit-user/edit-user-form/edit-user-form.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
-  declarations: [AppComponent, EditUserFormComponent, RegisterComponent, EditUserComponent],
+  declarations: [AppComponent, EditUserFormComponent, RegisterComponent, EditUserComponent, LoginComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
