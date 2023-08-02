@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,14 @@ export class AuthService {
     return this.http.post<User[]>(
       `${environment.apiURL}/${this.subpage}/${this.Register.name}`,
       user
+    );
+  }
+
+  public RegisterConfirmation(key: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(
+      `${environment.apiURL}/${this.subpage}/Register/Confirmation?key=${key}`,
+      { headers }
     );
   }
 

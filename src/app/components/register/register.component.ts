@@ -4,6 +4,7 @@ import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { tap, catchError, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,22 +27,38 @@ export class RegisterComponent implements OnInit {
     this.subscribeFormChanges();
   }
 
-  formValidators(): void{
+  formValidators(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          // Validators.minLength(3)
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          // Validators.minLength(2)
+        ],
+      ],
       email: [
         '',
-        [Validators.required, Validators.minLength(3), Validators.email],
+        [
+          Validators.required,
+          // Validators.minLength(3),
+          // Validators.email
+        ],
       ],
       password: [
         '',
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
-          ),
+          // Validators.minLength(9),
+          // Validators.pattern(
+          //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
+          // ),
         ],
       ],
     });
@@ -63,11 +81,12 @@ export class RegisterComponent implements OnInit {
         .Register(this.user)
         .pipe(
           tap((response) => {
-            console.log('Registration has been completed ', response);
+            this.router.navigate(['/register/confirmation']);
+            console.log(response);
           }),
           catchError((error) => {
             console.error('Registration Error ', error);
-            throw error;
+            throw this.router.navigate(['/register']);
           })
         )
         .subscribe();
