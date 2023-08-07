@@ -6,11 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserFormComponent } from './components/edit-user/edit-user-form/edit-user-form.component';
-import { RegisterComponent } from './components/register/register.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
-import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { RegisterConfirmationComponent } from './components/register/register-confirmation/register-confirmation.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { RegisterConfirmationComponent } from './components/auth/register/register-confirmation/register-confirmation.component';
 
 @NgModule({
   declarations: [

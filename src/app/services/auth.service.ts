@@ -10,6 +10,7 @@ import { Login } from '../models/Login';
 })
 export class AuthService {
   subpage = 'Auth';
+  canEnterKey = false;
 
   constructor(private http: HttpClient) {}
 
@@ -28,8 +29,8 @@ export class AuthService {
     );
   }
 
-  public Login(login: Login): Observable<User[]> {
-    return this.http.post<User[]>(
+  public Login(login: Login): Observable<any> {
+    return this.http.post<Login>(
       `${environment.apiURL}/${this.subpage}/${this.Login.name}`,
       login
     );
