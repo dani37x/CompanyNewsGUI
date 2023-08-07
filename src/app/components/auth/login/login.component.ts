@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, catchError, takeUntil, tap } from 'rxjs';
 import { Login } from 'src/app/models/Login';
 import { User } from 'src/app/models/User';
@@ -18,7 +19,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,10 +30,7 @@ export class LoginComponent {
 
   formValidators(): void {
     this.loginForm = this.formBuilder.group({
-      email: [
-        '',
-        [Validators.required],
-      ],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
@@ -51,11 +50,17 @@ export class LoginComponent {
         .Login(this.login)
         .pipe(
           tap((response) => {
-            console.log('Logged in ', response);
+            if (response === true) {
+              console.log('Logged in ', response);
+              this.router.navigate(['/']);
+            } else {
+              console.log('Incorrect data ', response);
+              this.router.navigate(['/login']);
+            }
           }),
           catchError((error) => {
             console.error('Login Error ', error);
-            throw error;
+            throw this.router.navigate(['/login']);
           })
         )
         .subscribe();

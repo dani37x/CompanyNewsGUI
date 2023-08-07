@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -75,6 +75,13 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  startKeyGuard(): void {
+    setTimeout(() => {
+      this.authService.canEnterKey = false;
+      this.router.navigate(['/register']);
+    }, 1000 * 60 * 15);
+  }
+
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.authService
@@ -82,6 +89,8 @@ export class RegisterComponent implements OnInit {
         .pipe(
           tap((response) => {
             this.router.navigate(['/register/confirmation']);
+            this.authService.canEnterKey = true;
+            this.startKeyGuard();
             console.log(response);
           }),
           catchError((error) => {

@@ -44,7 +44,8 @@ export class RegisterConfirmationComponent {
         .pipe(
           tap((response) => {
             if (response === true) {
-              this.router.navigate(['/login']);
+              this.router.navigate(['/login'])
+              this.authService.canEnterKey = false;
               console.log(response);
             } else {
               this.router.navigate(['/register/confirmation']);
