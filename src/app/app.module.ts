@@ -11,6 +11,13 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RegisterConfirmationComponent } from './components/auth/register/register-confirmation/register-confirmation.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,6 +28,7 @@ import { RegisterConfirmationComponent } from './components/auth/register/regist
     LoginComponent,
     HomeComponent,
     RegisterConfirmationComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +36,10 @@ import { RegisterConfirmationComponent } from './components/auth/register/regist
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
