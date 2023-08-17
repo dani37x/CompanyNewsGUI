@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,10 +9,12 @@ import { EditUserFormComponent } from './components/edit-user/edit-user-form/edi
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { AuthInterceptor } from './components/auth/auth.interceptor';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RegisterConfirmationComponent } from './components/auth/register/register-confirmation/register-confirmation.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registrationGuard } from './guards/registration.guard';
 
 
 import { MatButtonModule } from '@angular/material/button';
@@ -41,7 +43,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatMenuModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
