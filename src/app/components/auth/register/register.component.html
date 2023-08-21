@@ -1,43 +1,117 @@
-<div>
-  <form [formGroup]="registerForm">
-    <div>
-      <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" formControlName="firstName">
-      <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)">
-        <div *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</div>
-        <!-- <div *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 3 characters long.</div> -->
+<div class="container">
+  <div class="container__left">
+    <img class="logo" src="../../../../assets/images/logoColor256px.png" alt="logo" />
+    <h1>CompanyNews</h1>
+  </div>
+  <div class="container__right">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm"  autocomplete="off">
+      <div>
+        <input
+          type="text"
+          class="container__input"
+          formControlName="firstName"
+          placeholder="First Name"
+        />
+        <div
+          *ngIf="
+            registerForm.get('firstName')?.invalid &&
+            (registerForm.get('firstName')?.dirty ||
+              registerForm.get('firstName')?.touched)
+          "
+        >
+          <div
+            class="container__error"
+            *ngIf="registerForm.get('firstName')?.errors?.['required']"
+          >
+            First Name is required.
+          </div>
+          <!-- <div class="container__error" *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 3 characters long.</div> -->
+        </div>
       </div>
-    </div>
 
-    <div>
-      <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" formControlName="lastName">
-      <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)">
-        <div *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</div>
-        <!-- <div *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2 characters long.</div> -->
+      <div>
+        <input
+          type="text"
+          class="container__input"
+          formControlName="lastName"
+          placeholder="Last Name"
+        />
+        <div
+          *ngIf="
+            registerForm.get('lastName')?.invalid &&
+            (registerForm.get('lastName')?.dirty ||
+              registerForm.get('lastName')?.touched)
+          "
+        >
+          <div
+            class="container__error"
+            *ngIf="registerForm.get('lastName')?.errors?.['required']"
+          >
+            Last Name is required.
+          </div>
+          <!-- <div *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2 characters long.</div> -->
+        </div>
       </div>
-    </div>
 
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" formControlName="email">
-      <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
-        <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
-        <!-- <div *ngIf="registerForm.get('email')?.errors?.['minlength']">Email must be at least 3 characters long.</div>
-        <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div> -->
+      <div>
+        <input
+          type="email"
+          class="container__input"
+          formControlName="email"
+          placeholder="E-mail"
+        />
+        <div
+          *ngIf="
+            registerForm.get('email')?.invalid &&
+            (registerForm.get('email')?.dirty ||
+              registerForm.get('email')?.touched)
+          "
+        >
+          <div
+            class="container__error"
+            *ngIf="registerForm.get('email')?.errors?.['required']"
+          >
+            Email is required.
+          </div>
+          <!-- <div class="container__error" *ngIf="registerForm.get('email')?.errors?.['minlength']">Email must be at least 3 characters long.</div>
+        <div class="container__error" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div> -->
+        </div>
       </div>
-    </div>
 
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" formControlName="password">
-      <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
-        <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
-        <!-- <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
-        <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</div> -->
+      <div>
+        <input
+          type="password"
+          class="container__input"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <div
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            (registerForm.get('password')?.dirty ||
+              registerForm.get('password')?.touched)
+          "
+        >
+          <div
+            class="container__error"
+            *ngIf="registerForm.get('password')?.errors?.['required']"
+          >
+            Password is required.
+          </div>
+          <!-- <div class="container__error" *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
+        <div class="container__error" *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</div> -->
+        </div>
       </div>
-    </div>
 
-    <button type="submit" [disabled]="registerForm.invalid" (click)="onSubmit()">Register</button>
-  </form>
+      <button
+        type="submit"
+        class="container__input-btn"
+        [disabled]="registerForm.invalid"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
 </div>

@@ -4,19 +4,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 html,
 body {
-  height: 100%;
+  background-color: var(--whiteSmoke);
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
-:root{
-  --red: #cd3838;
+:root {
+  --white: #eaeaea;
+  --whiteSmoke: #e5e5e5;
+  --lightPink: #e6a2ac;
+  --pink: #e48c9c;
+  --lightRed: #eb5c6c;
+  --red: #dc2c44;
+  --grey: #b9afaf16;
   --black: #333;
-  --white: #e8e0e0;
-  --grey: #efe5e599;
 }

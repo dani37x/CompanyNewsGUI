@@ -27,6 +27,11 @@ export class RegisterComponent implements OnInit {
     this.subscribeFormChanges();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   formValidators(): void {
     this.registerForm = this.formBuilder.group({
       firstName: [
