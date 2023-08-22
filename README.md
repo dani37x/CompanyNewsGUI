@@ -30,3 +30,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Used Icons
 
 https://www.flaticon.com/free-icon/apple_831311?term=news&related_id=831311
+
+https://icons8.com/icons/set/social-media--white
