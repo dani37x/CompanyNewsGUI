@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, catchError, takeUntil, tap } from 'rxjs';
 import { Login } from 'src/app/models/Login';
 import { User } from 'src/app/models/User';
@@ -46,17 +47,19 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
+      const jwtHelper = new JwtHelperService();
+
       this.authService
         .Login(this.login)
         .pipe(
           tap((response) => {
-            if (response === true) {
-              console.log('Logged in ', response);
-              this.router.navigate(['/']);
-            } else {
-              console.log('Incorrect data ', response);
-              this.router.navigate(['/login']);
-            }
+            var token = JSON.stringify(response);
+            token = token.replace('{"token":"', '').replace('"', '');
+            localStorage.setItem('token', token);
+            console.log('Logged in ', response);
+            console.log(jwtHelper.decodeToken(token));
+
+            this.router.navigate(['/']);
           }),
           catchError((error) => {
             console.error('Login Error ', error);

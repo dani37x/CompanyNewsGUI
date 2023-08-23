@@ -4,12 +4,12 @@ import {
   HttpEvent,
   HttpHandler,
   HttpRequest,
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  // expiredTime!: Date | undefined;
 
   intercept(
     req: HttpRequest<any>,
@@ -25,3 +25,9 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req);
   }
 }
+
+export const AuthInterceptorProvider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthInterceptor,
+  multi: true,
+};
