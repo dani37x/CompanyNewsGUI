@@ -10,7 +10,6 @@ import { Login } from '../models/Login';
 })
 export class AuthService {
   subpage = 'Auth';
-  canEnterKey = false;
 
   constructor(private http: HttpClient) {}
 

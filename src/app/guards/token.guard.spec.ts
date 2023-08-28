@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
 
-import { registrationGuard } from './registration.guard';
+import { TokenGuard } from './token.guard';
 
-describe('registrationGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => registrationGuard(...guardParameters));
+describe('tokenGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+      TestBed.runInInjectionContext(() => tokenGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

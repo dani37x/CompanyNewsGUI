@@ -5,7 +5,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterConfirmationComponent } from './components/auth/register/register-confirmation/register-confirmation.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { registrationGuard } from './guards/registration.guard';
+import { keyGuard } from './guards/key.guard';
+import { tokenGuard } from './guards/token.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,9 +15,13 @@ const routes: Routes = [
   {
     path: 'register/confirmation',
     component: RegisterConfirmationComponent,
-    canActivate: [registrationGuard],
+    canActivate: [keyGuard],
   },
-  { path: 'edit-user', component: EditUserComponent },
+  {
+    path: 'edit-user',
+    component: EditUserComponent,
+    canActivate: [tokenGuard],
+  },
 ];
 
 @NgModule({

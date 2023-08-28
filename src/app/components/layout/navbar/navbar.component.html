@@ -1,0 +1,30 @@
+<nav class="menu">
+  <div class="container">
+    <h1>CompanyNews</h1>
+    <div class="container__links" *ngIf="!mobile; else showMenu">
+      <a href="" class="container__links__link">1</a>
+      <a href=""class="container__links__link">2</a>
+      <a href=""class="container__links__link">3</a>
+      <a href=""class="container__links__link">4</a>
+    </div>
+    <ng-template #showMenu>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon></mat-icon>
+          <span>1</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>2</mat-icon>
+          <span>2</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>3</mat-icon>
+          <span>3</span>
+        </button>
+      </mat-menu>
+    </ng-template>
+  </div>
+</nav>
