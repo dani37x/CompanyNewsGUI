@@ -1,10 +1,2 @@
-<form [formGroup]="keyForm">
-  <div>
-    <label for="key">key:</label>
-    <input type="text" id="key" formControlName="key">
-    <div *ngIf="keyForm.get('key')?.invalid && keyForm.get('key')?.touched">
-      <div *ngIf="keyForm.get('key')?.errors?.['required']">key is required.</div>
-    </div>
-  </div>
-  <button type="submit" [disabled]="keyForm.invalid" (click)="onSubmit()">Verify email</button>
-</form>
+<app-navbar></app-navbar>
+<app-key-input [purposeName]="'Registration'" (keyInput)="onSubmit($event)"></app-key-input>
