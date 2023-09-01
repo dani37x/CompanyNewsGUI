@@ -1,15 +1,16 @@
+<!-- <app-navbar></app-navbar> -->
 <div class="container">
-  <div class="container__left">
-    <img class="logo" src="../../../../assets/images/logoColor256px.png" alt="logo" />
-    <h1>CompanyNews</h1>
+  <div class="container__left_container">
+    <img class="left_container__logo" src="../../../../assets/images/logoColor256px.png" alt="logo" />
+    <h1 class="left_container__h1">CompanyNews</h1>
   </div>
-  <div class="container__right">
-    <h2>Register</h2>
+  <div class="container__right_container">
+    <h2 class="right_container__h2">Register</h2>
     <form [formGroup]="registerForm"  autocomplete="off">
       <div>
         <input
           type="text"
-          class="container__input"
+          class="form__input"
           formControlName="firstName"
           placeholder="First Name"
         />
@@ -21,19 +22,19 @@
           "
         >
           <div
-            class="container__error"
+            class="form__error_message"
             *ngIf="registerForm.get('firstName')?.errors?.['required']"
           >
             First Name is required.
           </div>
-          <!-- <div class="container__error" *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 3 characters long.</div> -->
+          <!-- <div class="form__error_message" *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 3 characters long.</div> -->
         </div>
       </div>
 
       <div>
         <input
           type="text"
-          class="container__input"
+          class="form__input"
           formControlName="lastName"
           placeholder="Last Name"
         />
@@ -45,7 +46,7 @@
           "
         >
           <div
-            class="container__error"
+            class="form__error_message"
             *ngIf="registerForm.get('lastName')?.errors?.['required']"
           >
             Last Name is required.
@@ -57,7 +58,7 @@
       <div>
         <input
           type="email"
-          class="container__input"
+          class="form__input"
           formControlName="email"
           placeholder="E-mail"
         />
@@ -69,20 +70,20 @@
           "
         >
           <div
-            class="container__error"
+            class="form__error_message"
             *ngIf="registerForm.get('email')?.errors?.['required']"
           >
             Email is required.
           </div>
-          <!-- <div class="container__error" *ngIf="registerForm.get('email')?.errors?.['minlength']">Email must be at least 3 characters long.</div>
-        <div class="container__error" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div> -->
+          <!-- <div class="form__error_message" *ngIf="registerForm.get('email')?.errors?.['minlength']">Email must be at least 3 characters long.</div>
+        <div class="form__error_message" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div> -->
         </div>
       </div>
 
       <div>
         <input
           type="password"
-          class="container__input"
+          class="form__input"
           formControlName="password"
           placeholder="Password"
         />
@@ -94,24 +95,26 @@
           "
         >
           <div
-            class="container__error"
+            class="form__error_message"
             *ngIf="registerForm.get('password')?.errors?.['required']"
           >
             Password is required.
           </div>
-          <!-- <div class="container__error" *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
-        <div class="container__error" *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</div> -->
+          <!-- <div class="form__error_message" *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
+        <div class="form__error_message" *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</div> -->
         </div>
       </div>
 
       <button
         type="submit"
-        class="container__input-btn"
+        class="form__btn"
         [disabled]="registerForm.invalid"
         (click)="onSubmit()"
       >
-        Submit
+      <span class="btn__span">Submit</span>
+
       </button>
     </form>
   </div>
 </div>
+<!-- <app-footer></app-footer> -->

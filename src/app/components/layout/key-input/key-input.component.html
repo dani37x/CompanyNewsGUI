@@ -1,0 +1,31 @@
+<div class="container">
+  <p class="container__text">
+    Check your e-mail. Your {{ purposeName }} token should be there.
+  </p>
+  <form [formGroup]="keyForm" class="container__form">
+    <input
+      class="form__input"
+      type="text"
+      formControlName="key"
+      placeholder="key"
+    />
+    <div *ngIf="keyForm.get('key')?.invalid && keyForm.get('key')?.touched">
+      <div
+        class="form__error_message"
+        *ngIf="keyForm.get('key')?.errors?.['required']"
+      >
+        key is required.
+      </div>
+    </div>
+    <button
+      class="form__btn"
+      type="submit"
+      [disabled]="keyForm.invalid"
+      (click)="SendKey()"
+    >
+      <span class="btn__span"> Check </span>
+    </button>
+  </form>
+</div>
+
+<app-footer></app-footer>
