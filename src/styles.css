@@ -23,3 +23,12 @@ body {
   --grey: #b9afaf16;
   --black: #333;
 }
+
+input,
+textarea,
+button,
+select,
+a,
+div {
+  -webkit-tap-highlight-color: transparent;
+}
