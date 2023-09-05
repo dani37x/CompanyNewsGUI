@@ -9,7 +9,7 @@ import { EditUserFormComponent } from './components/edit-user/edit-user-form/edi
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { AuthInterceptor, AuthInterceptorProvider } from './components/auth/auth.interceptor';
+import { AuthInterceptorProvider } from './components/interceptors/auth.interceptor';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RegisterConfirmationComponent } from './components/auth/register/register-confirmation/register-confirmation.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
@@ -21,7 +21,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './components/layout/footer/footer/footer.component';
 import { NewPasswordComponent } from './components/auth/new-password/new-password.component';
 import { KeyInputComponent } from './components/layout/key-input/key-input.component';
-
+import { NewPasswordConfirmationComponent } from './components/auth/new-password/new-password-confirmation/new-password-confirmation.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from './components/layout/loader/loader.component';
+import { LoaderInterceptorProvider } from './components/interceptors/loader.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,8 @@ import { KeyInputComponent } from './components/layout/key-input/key-input.compo
     FooterComponent,
     NewPasswordComponent,
     KeyInputComponent,
+    NewPasswordConfirmationComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,9 @@ import { KeyInputComponent } from './components/layout/key-input/key-input.compo
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [AuthInterceptorProvider, LoaderInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

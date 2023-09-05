@@ -7,7 +7,7 @@ export const keyGuard: CanActivateFn = (route, state) => {
   const authService: AuthService = inject(AuthService);
   const location: Location = inject(Location);
 
-  if (localStorage.getItem('vz2cd')) {
+  if (localStorage.getItem('key')) {
     return true;
   } else {
     location.back();
