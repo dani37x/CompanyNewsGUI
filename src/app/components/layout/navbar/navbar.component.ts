@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,23 +6,11 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  mobile: boolean | undefined;
+  showHamburger = false;
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.checkScreenSize();
-  }
+  constructor(private renderer: Renderer2) {}
 
-  ngOnInit(): void {
-    this.checkScreenSize();
-  }
-
-  checkScreenSize() {
-    if (window.screen.width <= 768) {
-      this.mobile = true;
-    }
-    else{
-      this.mobile = false;
-    }
+  onClick() {
+    this.showHamburger = !this.showHamburger;
   }
 }
