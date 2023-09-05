@@ -53,8 +53,8 @@ export class LoginComponent {
         .Login(this.login)
         .pipe(
           tap((response) => {
-            var token = JSON.stringify(response);
-            token = token.replace('{"token":"', '').replace('"', '');
+            let token = JSON.stringify(response);
+            token = token.replace('{"token":"', '').replace('"', '').replace('}','');
             localStorage.setItem('token', token);
             console.log('Logged in ', response);
             console.log(jwtHelper.decodeToken(token));
