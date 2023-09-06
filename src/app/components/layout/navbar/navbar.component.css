@@ -6,6 +6,9 @@
   justify-content: space-between;
   align-items: center;
   height: 9vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 2;
 }
 
 .navbar__title {
@@ -48,11 +51,15 @@
 
 .hamburger_menu {
   height: 91vh;
+  width: 100vw;
+  margin-top: 9vh;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--lightRed);
   transition: all 1s;
+  z-index: 2;
 }
 
 .hamburger__link {
