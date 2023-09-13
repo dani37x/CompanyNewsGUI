@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Location } from '@angular/common';
 
-export const keyGuard: CanActivateFn = (route, state) => {
+export const keyGuard: CanActivateFn = () => {
   const authService: AuthService = inject(AuthService);
   const location: Location = inject(Location);
 
