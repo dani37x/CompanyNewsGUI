@@ -1,37 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs';
 import { NewPassword } from 'src/app/models/NewPassword';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-new-password',
-  templateUrl: './new-password.component.html',
-  styleUrls: ['./new-password.component.css'],
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.css'],
 })
-export class NewPasswordComponent {
+export class ChangePasswordComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(newPassword: NewPassword) {
     this.authService
-      .NewPassword(newPassword)
+      .ChangePassword(newPassword)
       .pipe(
         tap((response) => {
           if (response === true) {
-            localStorage.setItem('key', 'key');
-            this.authService.startKeyGuard(
-              '/new-password/confirmation',
-              '/new-password'
-            );
-            this.router.navigate(['/new-password/confirmation']);
+            this.router.navigate(['/login']);
           } else {
-            this.router.navigate(['/new-password']);
+            this.router.navigate(['/change-password']);
           }
           console.log(response);
         }),
         catchError((error) => {
           console.log(error);
-          throw this.router.navigate(['/new-password']);
+          throw this.router.navigate(['/change-password']);
         })
       )
       .subscribe();

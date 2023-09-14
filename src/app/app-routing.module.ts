@@ -8,6 +8,8 @@ import { keyGuard } from './guards/key.guard';
 import { tokenGuard } from './guards/token.guard';
 import { NewPasswordComponent } from './components/auth/new-password/new-password.component';
 import { PasswordInputComponent } from './components/layout/password-input/password-input.component';
+import { NewPasswordConfirmationComponent } from './components/auth/new-password/new-password-confirmation/new-password-confirmation.component';
+import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 
 const routes: Routes = [
   { path: '', component: NewPasswordComponent },
@@ -23,13 +25,23 @@ const routes: Routes = [
     component: NewPasswordComponent,
   },
   {
+    path: 'new-password/confirmation',
+    component: NewPasswordConfirmationComponent,
+    canActivate: [keyGuard],
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
+    canActivate: [tokenGuard],
+  },
+  {
     path: 'test',
     component: PasswordInputComponent,
   },
   {
     path: 'edit-user',
     component: EditUserComponent,
-    canActivate: [tokenGuard],
+    // canActivate: [tokenGuard],
   },
 ];
 

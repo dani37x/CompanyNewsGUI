@@ -25,6 +25,9 @@ import { NewPasswordConfirmationComponent } from './components/auth/new-password
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from './components/layout/loader/loader.component';
 import { LoaderInterceptorProvider } from './components/interceptors/loader.interceptor';
+import { PasswordInputComponent } from './components/layout/password-input/password-input.component';
+import { CommonModule, KeyValuePipe } from '@angular/common';
+import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +43,8 @@ import { LoaderInterceptorProvider } from './components/interceptors/loader.inte
     KeyInputComponent,
     NewPasswordConfirmationComponent,
     LoaderComponent,
+    PasswordInputComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +57,9 @@ import { LoaderInterceptorProvider } from './components/interceptors/loader.inte
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    CommonModule,
   ],
-  providers: [AuthInterceptorProvider, LoaderInterceptorProvider],
+  providers: [AuthInterceptorProvider, LoaderInterceptorProvider, KeyValuePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

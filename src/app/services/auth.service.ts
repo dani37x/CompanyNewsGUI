@@ -51,7 +51,8 @@ export class AuthService {
       `${environment.apiURL}/${
         this.subpage
       }/${this.ChangePassword.name.toLowerCase()}`,
-      newPassword, {headers}
+      newPassword,
+      { headers }
     );
   }
 

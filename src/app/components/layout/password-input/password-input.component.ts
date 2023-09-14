@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, takeUntil } from 'rxjs';
 import { NewPassword } from 'src/app/models/NewPassword';
+import { equalToValidator } from '../../form-validators';
 
 @Component({
   selector: 'app-password-input',
@@ -12,20 +13,21 @@ import { NewPassword } from 'src/app/models/NewPassword';
 export class PasswordInputComponent {
   @Output() newPasswordInput = new EventEmitter<NewPassword>();
   @Input() purposeName!: string;
-  newPasswordModel!: NewPassword;
+  newPasswordModel: NewPassword = {
+    email: '',
+    password: '',
+  };
   newPasswordForm!: FormGroup;
   token = localStorage.getItem('token');
-  emailValue!: string;
   isEmailInToken: boolean = false;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.emailValue = this.extractEmailFromJWTToken() || '';
     this.formValidator();
-    this.subscribeFormChanges();
     this.checkUserEmailAndSetEmailField();
+    this.subscribeFormChanges();
   }
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -34,7 +36,7 @@ export class PasswordInputComponent {
 
   formValidator(): void {
     this.newPasswordForm = this.formBuilder.group({
-      email: [this.emailValue, [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: [
         '',
         [
@@ -53,7 +55,11 @@ export class PasswordInputComponent {
     this.newPasswordForm.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((formValues) => {
-        this.newPasswordModel.email = formValues.email;
+        if (this.isEmailInToken === false) {
+          this.newPasswordModel.email = formValues.email;
+        } else {
+          this.newPasswordModel.email = this.extractEmailFromJWTToken();
+        }
         this.newPasswordModel.password = formValues.password;
       });
   }
@@ -62,7 +68,11 @@ export class PasswordInputComponent {
     if (this.token != null) {
       const jwtHelper = new JwtHelperService();
       const decodedToken = jwtHelper.decodeToken(this.token);
-      // console.log(decodedToken[parameter]);
+      // console.log(
+      //   decodedToken[
+      //     'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      //   ]
+      // );
       return decodedToken[
         'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
       ];
@@ -70,7 +80,7 @@ export class PasswordInputComponent {
   }
 
   checkUserEmailAndSetEmailField(): void {
-    if (this.emailValue == this.extractEmailFromJWTToken()) {
+    if (this.extractEmailFromJWTToken()) {
       this.newPasswordForm.get('email')?.disable();
       this.isEmailInToken = true;
     }
@@ -78,6 +88,7 @@ export class PasswordInputComponent {
 
   sendModel() {
     if (this.newPasswordForm.valid) {
+      console.log('model:', this.newPasswordModel);
       this.newPasswordInput.emit(this.newPasswordModel);
     }
   }
