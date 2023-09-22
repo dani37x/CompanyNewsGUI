@@ -20,8 +20,8 @@ export class AuthService {
     private router: Router
   ) {}
 
-  public Register(user: User): Observable<User[]> {
-    return this.http.post<User[]>(
+  public Register(user: User): Observable<any> {
+    return this.http.post<any>(
       `${environment.apiURL}/${
         this.subpage
       }/${this.Register.name.toLowerCase()}`,

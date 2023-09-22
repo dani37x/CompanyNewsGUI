@@ -27,7 +27,7 @@
   font-size: 1.3rem;
   border: none;
   outline: none;
-  background-color: var(--lightPink);
+  background-color: var(--lightRed);
   color: var(--whiteSmoke);
   border-radius: 1rem;
   padding: 5px;
@@ -74,7 +74,7 @@
   left: 50%;
   width: 0;
   height: 100%;
-  background-color: var(--lightPink);
+  background-color: var(--grey);
   border-radius: 1rem;
   transition: all 0.35s;
 }

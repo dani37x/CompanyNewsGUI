@@ -21,8 +21,8 @@ export class RegisterConfirmationComponent {
       .pipe(
         tap((response) => {
           if (response === true) {
-            if (localStorage.getItem('vz2cd')) {
-              localStorage.removeItem('vz2cd');
+            if (localStorage.getItem('key')) {
+              localStorage.removeItem('key');
             }
             this.router.navigate(['/login']);
             console.log(response);

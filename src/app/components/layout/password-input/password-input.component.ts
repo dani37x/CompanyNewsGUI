@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,8 +17,8 @@ import { equalToValidator } from '../../form-validators';
   templateUrl: './password-input.component.html',
   styleUrls: ['./password-input.component.css'],
 })
-export class PasswordInputComponent {
-  @Output() newPasswordInput = new EventEmitter<NewPassword>();
+export class PasswordInputComponent implements OnInit, OnDestroy {
+  @Output() newPasswordData = new EventEmitter<NewPassword>();
   @Input() purposeName!: string;
   newPasswordModel: NewPassword = {
     email: '',
@@ -32,6 +39,7 @@ export class PasswordInputComponent {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.newPasswordData.unsubscribe();
   }
 
   formValidator(): void {
@@ -51,7 +59,7 @@ export class PasswordInputComponent {
     });
   }
 
-  subscribeFormChanges(): any {
+  subscribeFormChanges(): void {
     this.newPasswordForm.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((formValues) => {
@@ -86,10 +94,10 @@ export class PasswordInputComponent {
     }
   }
 
-  sendModel() {
+  sendModel(): void {
     if (this.newPasswordForm.valid) {
       console.log('model:', this.newPasswordModel);
-      this.newPasswordInput.emit(this.newPasswordModel);
+      this.newPasswordData.emit(this.newPasswordModel);
     }
   }
 }

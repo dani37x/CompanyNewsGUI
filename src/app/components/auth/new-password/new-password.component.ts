@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, tap } from 'rxjs';
+import { Subscription, catchError, tap } from 'rxjs';
 import { NewPassword } from 'src/app/models/NewPassword';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,11 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.css'],
 })
-export class NewPasswordComponent {
+export class NewPasswordComponent implements OnDestroy {
+  private subscription$ = new Subscription();
+
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit(newPassword: NewPassword) {
-    this.authService
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
+
+  onSubmit(newPassword: NewPassword): void {
+    this.subscription$ = this.authService
       .NewPassword(newPassword)
       .pipe(
         tap((response) => {

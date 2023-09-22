@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, tap } from 'rxjs';
+import { Subscription, catchError, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,11 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './new-password-confirmation.component.html',
   styleUrls: ['./new-password-confirmation.component.css'],
 })
-export class NewPasswordConfirmationComponent {
+export class NewPasswordConfirmationComponent implements OnDestroy {
+  private subscription$ = new Subscription();
+
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
+
   onSubmit(key: string) {
-    this.authService
+    this.subscription$ = this.authService
       .NewPasswordConfirmation(key)
       .pipe(
         tap((response) => {
