@@ -1,9 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { tap, catchError, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,15 +18,18 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   user: User = new User();
   private destroy$: Subject<void> = new Subject<void>();
+  private serviceSubscription$ = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +40,7 @@ export class RegisterComponent implements OnInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.serviceSubscription$.unsubscribe();
   }
 
   formValidators(): void {
@@ -60,12 +71,13 @@ export class RegisterComponent implements OnInit {
         '',
         [
           Validators.required,
-          // Validators.minLength(9),
+          Validators.minLength(9),
           // Validators.pattern(
           //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
           // ),
         ],
       ],
+      updateOn: 'change',
     });
   }
 
@@ -80,22 +92,23 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  startKeyGuard(): void {
-    setTimeout(() => {
-      this.authService.canEnterKey = false;
-      this.router.navigate(['/register']);
-    }, 1000 * 60 * 15);
-  }
-
   onSubmit(): void {
     if (this.registerForm.valid) {
-      this.authService
+      this.serviceSubscription$ = this.authService
         .Register(this.user)
         .pipe(
           tap((response) => {
-            this.router.navigate(['/register/confirmation']);
-            this.authService.canEnterKey = true;
-            this.startKeyGuard();
+            if (response === true) {
+              localStorage.setItem('key', 'key');
+              this.authService.startKeyGuard(
+                '/register/confirmation',
+                '/register'
+              );
+              this.router.navigate(['/register/confirmation']);
+            } else {
+              this.router.navigate(['/register/confirmation']);
+            }
+
             console.log(response);
           }),
           catchError((error) => {
