@@ -2,8 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100v2;
+  width: 100vw;
   height: 100vh;
   background-color: var(--black);
+  position: fixed;
+  top: 0;
+  z-index: 9999;
 }
 
