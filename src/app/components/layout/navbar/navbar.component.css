@@ -8,6 +8,7 @@
   height: 9vh;
   width: 100vw;
   position: fixed;
+  top: 0;
   z-index: 2;
 }
 
@@ -60,6 +61,7 @@
   background-color: var(--lightRed);
   transition: all 1s;
   z-index: 2;
+  animation:  visiblity 0.5s;
 }
 
 .hamburger__link {
@@ -97,5 +99,14 @@ a {
   .navbar__dots,
   .hamburger_menu {
     display: none;
+  }
+}
+
+@keyframes visiblity {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
   }
 }
