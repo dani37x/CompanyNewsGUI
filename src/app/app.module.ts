@@ -28,6 +28,7 @@ import { LoaderInterceptorProvider } from './components/interceptors/loader.inte
 import { PasswordInputComponent } from './components/layout/password-input/password-input.component';
 import { CommonModule, KeyValuePipe } from '@angular/common';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
+import { NotificationComponent } from './components/layout/notification/notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
     LoaderComponent,
     PasswordInputComponent,
     ChangePasswordComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

@@ -42,11 +42,11 @@
 }
 
 .left_container__h1 {
-  font-size: 2rem;
+  font-size: 2.05rem;
 }
 
 .right_container__h2 {
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 1.6vw, 2.2rem);
 }
 
 .container__right_container {
@@ -136,9 +136,6 @@
 @media (width <= 1024px) {
   .left_container__h1 {
     font-size: 1.8rem;
-  }
-  .right_container__h2 {
-    font-size: 1.7rem;
   }
 
   .form__input,

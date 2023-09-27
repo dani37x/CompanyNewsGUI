@@ -1,0 +1,47 @@
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  width: 100vw;
+  height: 15vh;
+  position: fixed;
+  top: 0vh;
+  z-index: 9999;
+  animation-name: go-down;
+  animation-duration: 1.3s;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+}
+
+.notification__message {
+  text-align: center;
+  width: 75%;
+  overflow: hidden;
+  color: var(--black);
+}
+
+.notification__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 25%;
+}
+.actions__counter {
+  color: var(--black);
+  font-weight: lighter;
+}
+
+.actions__img {
+  cursor: pointer;
+}
+
+@keyframes go-down {
+  0% {
+    top: -15vh;
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
