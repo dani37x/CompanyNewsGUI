@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { tap, catchError, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
+import { NotificationMessage } from 'src/app/models/Notification';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +31,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -108,11 +111,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
             } else {
               this.router.navigate(['/register/confirmation']);
             }
-
+            let message = new NotificationMessage('sieeema', 'red');
+            this.notificationService.addNotification(message);
             console.log(response);
           }),
           catchError((error) => {
             console.error('Registration Error ', error);
+            let message = new NotificationMessage('sieeema', 'red');
+            this.notificationService.addNotification(message);
             throw this.router.navigate(['/register']);
           })
         )

@@ -1,41 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/models/Notification';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css'],
 })
-export class NotificationComponent {
+export class NotificationComponent implements OnDestroy {
   showNotification: boolean = true;
   backgroundColor!: string;
   mainNotification!: NotificationMessage;
-  notifications: Array<NotificationMessage> = [];
   counter: number = 1;
+  currentNotifications!: NotificationMessage[];
+  private serviceSubscription$ = new Subscription();
 
-  constructor() {
-    let message =
-      'when an unknown printer took a galley of type and scrambled it to make a type specimen book';
-    let color = 'red';
-    let x = new NotificationMessage(message, '#b34045');
-    let y = new NotificationMessage(message, '#99e9eb');
-    let z = new NotificationMessage(message, '#fecf6d');
-    this.notifications.push(x, y, z);
-    this.mainNotification = this.notifications[0];
+  constructor(private notificationService: NotificationService) {
+    this.serviceSubscription$ = this.notificationService
+      .getNotifications()
+      .subscribe((data) => {
+        this.currentNotifications = data;
+        this.currentNotifications.push(new NotificationMessage('olod', 'blue'));
+        this.mainNotification = this.currentNotifications[0];
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.serviceSubscription$.unsubscribe();
   }
 
   changeNotification(value: number): void {
-    let index = this.notifications.indexOf(this.mainNotification);
-    if (value > 0 && index + value < this.notifications.length) {
-      this.mainNotification = this.notifications[index + 1];
+    let index = this.currentNotifications.indexOf(this.mainNotification);
+    if (value > 0 && index + value < this.currentNotifications.length) {
+      this.mainNotification = this.currentNotifications[index + 1];
       this.counter += 1;
-    } else if (value < 0 && index - value > 0) {
-      this.mainNotification = this.notifications[index - 1];
+    } else if (value < 0 && index - 1 >= 0) {
+      this.mainNotification = this.currentNotifications[index - 1];
       this.counter -= 1;
     }
   }
 
+  deleteCurrentNotification(): void {
+    if (this.currentNotifications.length > 1) {
+      const elements = this.currentNotifications.filter((n) => {
+        return n.message != this.mainNotification.message;
+      });
+      this.currentNotifications = elements;
+      this.mainNotification = this.currentNotifications[0];
+      this.counter = 1;
+    } else {
+      this.deleteNotifications();
+    }
+  }
+
   deleteNotifications(): void {
-    this.notifications.length = 0;
+    this.currentNotifications = [];
   }
 }
