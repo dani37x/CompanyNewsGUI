@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/models/Notification';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -17,13 +17,18 @@ export class NotificationComponent implements OnDestroy {
   private serviceSubscription$ = new Subscription();
 
   constructor(private notificationService: NotificationService) {
-    this.serviceSubscription$ = this.notificationService
-      .getNotifications()
-      .subscribe((data) => {
-        this.currentNotifications = data;
-        this.currentNotifications.push(new NotificationMessage('olod', 'blue'));
-        this.mainNotification = this.currentNotifications[0];
-      });
+    setTimeout(() => {
+      this.serviceSubscription$ = this.notificationService
+        .getNotifications()
+        .subscribe((data) => {
+          this.currentNotifications = data;
+          // this.currentNotifications.push(
+          //   new NotificationMessage('olod', 'blue')
+          // );
+          this.mainNotification = this.currentNotifications[0];
+          this.counter = 1;
+        });
+    }, 5000);
   }
 
   ngOnDestroy(): void {
