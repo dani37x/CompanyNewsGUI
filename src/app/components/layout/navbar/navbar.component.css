@@ -53,7 +53,7 @@
 .hamburger_menu {
   height: 91vh;
   width: 100vw;
-  margin-top: 9vh;
+  top: 9vh;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@
   background-color: var(--lightRed);
   transition: all 1s;
   z-index: 2;
-  animation:  visiblity 0.5s;
+  animation: visiblity 0.9s;
 }
 
 .hamburger__link {
