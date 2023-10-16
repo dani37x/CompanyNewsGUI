@@ -7,18 +7,22 @@ import { Login } from '../models/Login';
 import { NewPassword } from '../models/NewPassword';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  subpage = 'auth';
+  private subpage = 'auth';
+  token = localStorage.getItem('token');
+
 
   constructor(
     private http: HttpClient,
     private location: Location,
     private router: Router
-  ) {}
+  ) {
+  }
 
   public Register(user: User): Observable<any> {
     return this.http.post<any>(
@@ -71,6 +75,19 @@ export class AuthService {
       `${environment.apiURL}/${this.subpage}/newpassword/confirmation?key=${key}`,
       { headers }
     );
+  }
+
+  public extractDataFromJWTToken(key: string): any {
+    if (this.token != null) {
+      const jwtHelper = new JwtHelperService();
+      const decodedToken = jwtHelper.decodeToken(this.token);
+      // console.log(
+      //   decodedToken[
+      //     'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      //   ]
+      // );
+      return decodedToken[key];
+    }
   }
 
   public startKeyGuard(
