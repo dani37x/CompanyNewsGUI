@@ -61,7 +61,7 @@
   background-color: var(--lightRed);
   transition: all 1s;
   z-index: 2;
-  animation: visiblity 0.9s;
+  /* animation: visiblity 0.9s; */
 }
 
 .hamburger__link {
@@ -102,11 +102,11 @@ a {
   }
 }
 
-@keyframes visiblity {
+/* @keyframes visiblity {
   0% {
     opacity: 0%;
   }
   100% {
     opacity: 100%;
   }
-}
+} */

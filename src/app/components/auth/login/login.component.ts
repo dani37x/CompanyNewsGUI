@@ -35,14 +35,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  formValidators(): void {
+  private formValidators(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
-  subscribeFormChanges(): void {
+  private subscribeFormChanges(): void {
     this.loginForm.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((formValues) => {

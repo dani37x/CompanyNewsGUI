@@ -10,9 +10,11 @@ import { NewPasswordComponent } from './components/auth/new-password/new-passwor
 import { PasswordInputComponent } from './components/layout/password-input/password-input.component';
 import { NewPasswordConfirmationComponent } from './components/auth/new-password/new-password-confirmation/new-password-confirmation.component';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
+import { HomeComponent } from './components/home/home.component';
+import { roleGuard } from './guards/role.guard';
 
 const routes: Routes = [
-  { path: '', component: NewPasswordComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
@@ -37,6 +39,10 @@ const routes: Routes = [
   {
     path: 'test',
     component: PasswordInputComponent,
+    canActivate: [roleGuard],
+    data: {
+      role: 'user'
+    }
   },
   {
     path: 'edit-user',

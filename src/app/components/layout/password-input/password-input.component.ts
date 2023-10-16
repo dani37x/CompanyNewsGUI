@@ -11,6 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, takeUntil } from 'rxjs';
 import { NewPassword } from 'src/app/models/NewPassword';
 import { equalToValidator } from '../../form-validators';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-password-input',
@@ -25,11 +26,13 @@ export class PasswordInputComponent implements OnInit, OnDestroy {
     password: '',
   };
   newPasswordForm!: FormGroup;
-  token = localStorage.getItem('token');
   isEmailInToken: boolean = false;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.formValidator();
@@ -66,29 +69,21 @@ export class PasswordInputComponent implements OnInit, OnDestroy {
         if (this.isEmailInToken === false) {
           this.newPasswordModel.email = formValues.email;
         } else {
-          this.newPasswordModel.email = this.extractEmailFromJWTToken();
+          this.newPasswordModel.email =
+            this.authService.extractDataFromJWTToken(
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+            );
         }
         this.newPasswordModel.password = formValues.password;
       });
   }
 
-  extractEmailFromJWTToken(): any {
-    if (this.token != null) {
-      const jwtHelper = new JwtHelperService();
-      const decodedToken = jwtHelper.decodeToken(this.token);
-      // console.log(
-      //   decodedToken[
-      //     'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
-      //   ]
-      // );
-      return decodedToken[
-        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
-      ];
-    }
-  }
-
   checkUserEmailAndSetEmailField(): void {
-    if (this.extractEmailFromJWTToken()) {
+    if (
+      this.authService.extractDataFromJWTToken(
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      )
+    ) {
       this.newPasswordForm.get('email')?.disable();
       this.isEmailInToken = true;
     }
