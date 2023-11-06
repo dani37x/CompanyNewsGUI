@@ -3,7 +3,7 @@ import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-form',
+  selector: 'app-edit-user-form',
   templateUrl: './edit-user-form.component.html',
   styleUrls: ['./edit-user-form.component.css'],
 })

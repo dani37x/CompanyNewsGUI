@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,28 +8,33 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
 })
-export class EditUserComponent {
+export class EditUserComponent implements OnDestroy {
   users: User[] = [];
   userToEdit?: User;
+  private subscription$ = new Subscription();
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService
+    this.subscription$ = this.userService
       .getUsers()
       .subscribe((result: User[]) => (this.users = result));
   }
 
-  updatedUsersList() {
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
+
+  updatedUsersList(): void {
     this.userService.getUsers().subscribe((updatedUsers: User[]) => {
       this.users = updatedUsers;
     });
   }
 
-  addNewUser() {
+  addNewUser(): void {
     this.userToEdit = new User();
   }
-  editUser(user: User) {
+  editUser(user: User): void {
     this.userToEdit = user;
   }
 }
