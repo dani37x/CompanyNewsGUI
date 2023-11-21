@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formValidators();

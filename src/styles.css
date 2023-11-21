@@ -14,17 +14,19 @@ body {
 }
 
 :root {
-  --white: #eaeaea;
+  --white: #fff7f7;
   --whiteSmoke: #e5e5e5;
   --lightPink: #e6a2ac;
   --pink: #e48c9c;
   --lightRed: #eb5c6c;
   --red: #dc2c43;
-  --blue: #99e9eb;
+  --blue: #66a5e1;
   --yellow: #fecf6d;
   --grey: #b9afafa3;
   --black: #333;
 }
+
+/* https://huemint.com/brand-3/#palette=2f3432-fffbf7-2cbc7f-cb385e */
 
 input,
 textarea,
