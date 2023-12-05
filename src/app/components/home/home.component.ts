@@ -8,7 +8,10 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  footerBackgroundColorInput: string = '#333'
+
   constructor(private notificationService: NotificationService) {
+
     let message = new NotificationMessage('sieeema', 'red');
     notificationService.addNotification(message);
   }
