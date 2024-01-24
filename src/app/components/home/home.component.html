@@ -2,10 +2,21 @@
 <app-navbar></app-navbar>
 <div class="container">
   <div class="container__container">
-    <div class="container__side_panel-left">
+    <div
+      [class]="classElementsPositions[0]"
+      (click)="onClickPanel($event, classElementsPositions[0])"
+      (mouseenter)="onMouseEnterPanel($event, classElementsPositions[0])"
+      (mouseleave)="onMouseLeavePanel($event, classElementsPositions[0])"
+    >
       <div class="panel__image">
         <img
-          class="image"
+          [class.image-blur]="
+            classElementsPositions[0] === 'container__side_panel-left' ||
+            classElementsPositions[0] === 'container__side_panel-right'
+          "
+          [class.image]="
+            classElementsPositions[0] === 'container__center_panel'
+          "
           src="../../../assets/images/homeCards/mainImages/butterfly.jpg"
           alt="photo"
         />
@@ -32,10 +43,21 @@
         </div>
       </div>
     </div>
-    <div class="container__center_panel">
+    <div
+      [class]="classElementsPositions[1]"
+      (click)="onClickPanel($event, classElementsPositions[1])"
+      (mouseenter)="onMouseEnterPanel($event, classElementsPositions[1])"
+      (mouseleave)="onMouseLeavePanel($event, classElementsPositions[1])"
+    >
       <div class="panel__image">
         <img
-          class="image"
+          [class.image-blur]="
+            classElementsPositions[1] === 'container__side_panel-left' ||
+            classElementsPositions[1] === 'container__side_panel-right'
+          "
+          [class.image]="
+            classElementsPositions[1] === 'container__center_panel'
+          "
           src="../../../assets/images/homeCards/mainImages/family.jpg"
           alt="photo"
         />
@@ -62,10 +84,21 @@
         </div>
       </div>
     </div>
-    <div class="container__side_panel-right">
+    <div
+      [class]="classElementsPositions[2]"
+      (click)="onClickPanel($event, classElementsPositions[2])"
+      (mouseenter)="onMouseEnterPanel($event, classElementsPositions[2])"
+      (mouseleave)="onMouseLeavePanel($event, classElementsPositions[2])"
+    >
       <div class="panel__image">
         <img
-          class="image"
+          [class.image-blur]="
+            classElementsPositions[2] === 'container__side_panel-left' ||
+            classElementsPositions[2] === 'container__side_panel-right'
+          "
+          [class.image]="
+            classElementsPositions[2] === 'container__center_panel'
+          "
           src="../../../assets/images/homeCards/mainImages/christmas.jpg"
           alt="photo"
         />
