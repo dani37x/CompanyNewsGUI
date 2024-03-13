@@ -29,6 +29,7 @@ import { PasswordInputComponent } from './components/layout/password-input/passw
 import { CommonModule, KeyValuePipe } from '@angular/common';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { NotificationComponent } from './components/layout/notification/notification.component';
+import { CardsComponent } from './components/layout/cards/cards/cards.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { NotificationComponent } from './components/layout/notification/notifica
     PasswordInputComponent,
     ChangePasswordComponent,
     NotificationComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,

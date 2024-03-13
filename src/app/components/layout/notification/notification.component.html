@@ -1,5 +1,9 @@
-<div *ngIf="currentNotifications.length > 0">
-  <div class="notification" [style.background-color]="mainNotification.color">
+<div *ngIf="currentNotifications && currentNotifications.length > 0">
+  <div
+    #notification
+    class="notification"
+    [style.background-color]="mainNotification.color"
+  >
     <div class="notification__message">
       {{ mainNotification.message }}
     </div>
@@ -33,6 +37,5 @@
       />
     </div>
   </div>
-  {{currentNotifications}}
+  {{ currentNotifications }}
 </div>
-

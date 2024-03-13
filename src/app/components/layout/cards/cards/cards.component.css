@@ -22,7 +22,7 @@
   position: relative;
   border: 1px solid var(--white);
   transition: all 0.3s ease-in-out;
-  filter: grayscale(0.7)
+  filter: grayscale(0.7);
 }
 
 .container__side_panel-right-enter {
