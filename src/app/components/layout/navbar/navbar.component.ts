@@ -33,7 +33,7 @@ import { Component, Renderer2 } from '@angular/core';
 export class NavbarComponent {
   showHamburger = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) { }
 
   onClick() {
     this.showHamburger = !this.showHamburger;

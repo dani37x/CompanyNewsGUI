@@ -9,7 +9,7 @@
   width: 100vw;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 9998;
 }
 
 .navbar__title {
@@ -54,6 +54,7 @@
   width: 100%;
   top: 8.5vh;
   position: fixed;
+  z-index: 9998;
 }
 .animated_bar__strip {
   height: 0.5vh;
@@ -91,7 +92,7 @@
   align-items: center;
   background-color: var(--lightRed);
   transition: all 1s;
-  z-index: 2;
+  z-index: 9998;
 }
 
 .hamburger__link {

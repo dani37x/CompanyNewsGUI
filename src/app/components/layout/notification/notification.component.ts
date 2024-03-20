@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/models/Notification';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -15,8 +15,12 @@ export class NotificationComponent implements OnDestroy {
   counter: number = 1;
   currentNotifications!: NotificationMessage[];
   private serviceSubscription$ = new Subscription();
+  @ViewChild('notification') notification: ElementRef<HTMLInputElement>;
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService, private renderer: Renderer2) {
+  }
+
+  ngAfterViewInit() {
     setTimeout(() => {
       this.serviceSubscription$ = this.notificationService
         .getNotifications()
@@ -60,6 +64,9 @@ export class NotificationComponent implements OnDestroy {
   }
 
   deleteNotifications(): void {
-    this.currentNotifications = [];
+    this.renderer.addClass(this.notification.nativeElement, 'close_notification');
+    setTimeout(() => {
+      this.currentNotifications = [];
+    }, 3000);
   }
 }

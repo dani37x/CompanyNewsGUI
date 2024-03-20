@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9998;
+  z-index: 9999;
   animation-name: go-down;
   animation-duration: 1.3s;
   border-bottom-left-radius: 15%;
@@ -37,6 +37,11 @@
   cursor: pointer;
 }
 
+.close_notification {
+  animation-name: go-up;
+  animation-duration: 3s;
+}
+
 @keyframes go-down {
   0% {
     top: -15vh;
@@ -44,5 +49,15 @@
   }
   100% {
     opacity: 100%;
+  }
+}
+
+@keyframes go-up {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    top: -15vh;
+    opacity: 0;
   }
 }
